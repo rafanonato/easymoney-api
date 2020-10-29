@@ -1,0 +1,43 @@
+service: serverless-lambda-demo # NOTE: update this with your service name
+
+stage: dev # setting the env stage to dev, this will be visible in the routes
+
+plugins:
+  - serverless-offline # adding the plugin to be able to run the offline emulation
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+functions: # add 4 functions for CRUD
+  create:
+    handler: handler.create # point to exported create function in handler.js
+    events:
+      - http:
+          path: notes # path will be domain.name.com/dev/notes
+          method: post
+  getOne:
+    handler: handler.getOne
+    events:
+      - http:
+          path: notes/{id} # path will be domain.name.com/dev/notes/1
+          method: get
+  getAll:
+    handler: handler.getAll # path will be domain.name.com/dev/notes
+    events:
+     - http:
+         path: notes
+         method: get
+  update:
+    handler: handler.update # path will be domain.name.com/dev/notes/1
+    events:
+     - http:
+         path: notes/{id}
+         method: put
+  delete:
+    handler: handler.delete
+    events:
+     - http:
+         path: notes/{id} # path will be domain.name.com/dev/notes/1
+         method: delete
+
