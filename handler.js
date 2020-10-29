@@ -1,5 +1,4 @@
 const connectToDatabase = require('./db');
-const Note = require('./todo.model');
 const user = require('./user.model');
 require('dotenv').config({ path: './variables.env' });
 
@@ -16,7 +15,7 @@ module.exports.create = (event, context, callback) => {
         .catch(err => callback(null, {
           statusCode: err.statusCode || 500,
           headers: { 'Content-Type': 'text/plain' },
-          body: 'Could not create the note.'
+          body: JSON.stringify('Could not create the User.')
         }));
     });
 };
@@ -34,7 +33,7 @@ module.exports.getOne = (event, context, callback) => {
         .catch(err => callback(null, {
           statusCode: err.statusCode || 500,
           headers: { 'Content-Type': 'text/plain' },
-          body: 'Could not fetch the note.'
+          body: JSON.stringify('Could not find the User.')
         }));
     });
 };
@@ -52,7 +51,7 @@ module.exports.getAll = (event, context, callback) => {
         .catch(err => callback(null, {
           statusCode: err.statusCode || 500,
           headers: { 'Content-Type': 'text/plain' },
-          body: 'Could not fetch the notes.'
+          body: JSON.stringify('Could not find the User.')
         }))
     });
 };
@@ -70,7 +69,7 @@ module.exports.update = (event, context, callback) => {
         .catch(err => callback(null, {
           statusCode: err.statusCode || 500,
           headers: { 'Content-Type': 'text/plain' },
-          body: 'Could not fetch the notes.'
+          body: JSON.stringify('Could not update the User.')
         }));
     });
 };
@@ -88,7 +87,7 @@ module.exports.delete = (event, context, callback) => {
         .catch(err => callback(null, {
           statusCode: err.statusCode || 500,
           headers: { 'Content-Type': 'text/plain' },
-          body: 'Could not fetch the notes.'
+          body: JSON.stringify('Could not delete the User.')
         }));
     });
 };
