@@ -14,7 +14,7 @@ functions: # add 4 functions for CRUD
     handler: handler.create # point to exported create function in handler.js
     events:
       - http:
-          path: notes # path will be domain.name.com/dev/notes
+          path: /api/user # path will be domain.name.com/dev/notes
           method: post
   getOne:
     handler: handler.getOne

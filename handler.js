@@ -1,5 +1,6 @@
 const connectToDatabase = require('./db');
 const Note = require('./todo.model');
+const user = require('./user.model');
 require('dotenv').config({ path: './variables.env' });
 
 module.exports.create = (event, context, callback) => {
@@ -8,9 +9,9 @@ module.exports.create = (event, context, callback) => {
   connectToDatabase()
     .then(() => {
       Note.create(JSON.parse(event.body))
-        .then(note => callback(null, {
+        .then(user => callback(null, {
           statusCode: 200,
-          body: JSON.stringify(note)
+          body: JSON.stringify(user)
         }))
         .catch(err => callback(null, {
           statusCode: err.statusCode || 500,
