@@ -60,9 +60,37 @@ module.exports.getdata = (event, context, callback) => {
         }))
         .catch(err => callback(null, {
           statusCode: err.statusCode || 500,
-          headers: { 'Content-Type': 'text/plain' },
-          body: JSON.stringify('Could not find the Data.')
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(
+            { 
+              statuscode: 500,
+              message: 'Não foi possível encontar o usuário!'
+            }
+          )
         }));
+    });
+};
+
+module.exports.getAllData = (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+
+  connectToDatabase()
+    .then(() => {
+      data.find()
+        .then(data => callback(null, {
+          statusCode: 200,
+          body: JSON.stringify(data)
+        }))
+        .catch(err => callback(null, {
+          statusCode: err.statusCode || 500,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(
+            { 
+              statuscode: 500,
+              message: 'Não foi possivel listar os serviços!'
+            }
+          )
+        }))
     });
 };
 
@@ -78,8 +106,13 @@ module.exports.getOne = (event, context, callback) => {
         }))
         .catch(err => callback(null, {
           statusCode: err.statusCode || 500,
-          headers: { 'Content-Type': 'text/plain' },
-          body: JSON.stringify('Could not find the User.')
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(
+            { 
+              statuscode: 500,
+              message: 'Não foi possível enconrar o usuário!'
+            }
+          )
         }));
     });
 };
@@ -96,8 +129,13 @@ module.exports.getAll = (event, context, callback) => {
         }))
         .catch(err => callback(null, {
           statusCode: err.statusCode || 500,
-          headers: { 'Content-Type': 'text/plain' },
-          body: JSON.stringify('Could not find the User.')
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(
+            { 
+              statuscode: 500,
+              message: 'Não foi possivel listar os usuários!'
+            }
+          )
         }))
     });
 };
@@ -114,8 +152,13 @@ module.exports.update = (event, context, callback) => {
         }))
         .catch(err => callback(null, {
           statusCode: err.statusCode || 500,
-          headers: { 'Content-Type': 'text/plain' },
-          body: JSON.stringify('Could not update the User.')
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(
+            { 
+              statuscode: 500,
+              message: 'Não foi possivel Alterar o usuário!'
+            }
+          )
         }));
     });
 };
@@ -132,8 +175,13 @@ module.exports.delete = (event, context, callback) => {
         }))
         .catch(err => callback(null, {
           statusCode: err.statusCode || 500,
-          headers: { 'Content-Type': 'text/plain' },
-          body: JSON.stringify('Could not delete the User.')
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(
+            { 
+              statuscode: 500,
+              message: 'Não foi possivel Remover o usuário!'
+            }
+          )
         }));
     });
 };

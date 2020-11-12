@@ -28,6 +28,14 @@ functions:
       - http:
           path: /api/data/{id}
           method: get
+
+  getAllData:
+    handler: handler.getAllData
+    events:
+     - http:
+         path: /api/data
+         method: get
+  
   getOne:
     handler: handler.getOne
     events:
