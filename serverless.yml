@@ -16,6 +16,18 @@ functions:
       - http:
           path: /api/user
           method: post
+  createdata:
+    handler: handler.createdata
+    events:
+      - http:
+          path: /api/data/createdata
+          method: post
+  getdata:
+    handler: handler.getdata
+    events:
+      - http:
+          path: /api/data/{id}
+          method: get
   getOne:
     handler: handler.getOne
     events:

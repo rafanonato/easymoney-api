@@ -1,5 +1,6 @@
 const connectToDatabase = require('./db');
 const user = require('./user.model');
+const data = require('./data.model')
 require('dotenv').config({ path: './variables.env' });
 
 module.exports.create = (event, context, callback) => {
@@ -16,6 +17,42 @@ module.exports.create = (event, context, callback) => {
           statusCode: err.statusCode || 500,
           headers: { 'Content-Type': 'text/plain' },
           body: JSON.stringify('Could not create the User.')
+        }));
+    });
+};
+
+module.exports.createdata = (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+
+  connectToDatabase()
+    .then(() => {
+      data.create(JSON.parse(event.body))
+        .then(data => callback(null, {
+          statusCode: 200,
+          body: JSON.stringify(data)
+        }))
+        .catch(err => callback(null, {
+          statusCode: err.statusCode || 500,
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify('Could not create the Data.')
+        }));
+    });
+};
+
+module.exports.getdata = (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+
+  connectToDatabase()
+    .then(() => {
+      data.findById(event.pathParameters.id)
+        .then(data => callback(null, {
+          statusCode: 200,
+          body: JSON.stringify(data)
+        }))
+        .catch(err => callback(null, {
+          statusCode: err.statusCode || 500,
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify('Could not find the Data.')
         }));
     });
 };
