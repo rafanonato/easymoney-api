@@ -1,4 +1,5 @@
-# Serverless Application
+# Backend Application - Easy Money
+## Univesp University
 
 ### Endpoint of API´s
 - POST - https://m78rqas49g.execute-api.us-east-1.amazonaws.com/dev/api/user
